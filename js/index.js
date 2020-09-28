@@ -1,5 +1,4 @@
-// Declarando o objeto com as cotações
-const cotacoes = {
+let cotacoes = {
     rates:{
         CAD:1.5567,HKD:9.1428,ISK:162.2,PHP:57.167,
         DKK:7.4396,HUF:361.16,CZK:26.747,AUD:1.6152,
@@ -13,3 +12,43 @@ const cotacoes = {
     base:"EUR",
     date:"2020-09-17"
 }
+
+let moedaPrincipal = "BRL";
+
+const exibirCotacaoPrincipal = () => {
+  document.getElementById('moedaBase').innerHTML = cotacoes.base;
+  document.getElementById('moedaPrincipal').innerHTML = moedaPrincipal;
+  document.getElementById('cotacaoPrincipal').innerHTML = cotacoes.rates[moedaPrincipal].toFixed(4);
+  console.log("principal ok");
+}
+
+const exibirOutrasCotacoes = () => {
+    let section = document.getElementById('outrasCotacoes');
+      section.innerHTML = "";
+        for (const local in cotacoes.rates) {
+            let moeda = document.createElement('article');
+            let pais = document.createElement('h2');
+            let valor = document.createElement('span');
+              pais.innerHTML = local;
+              valor.innerHTML = cotacoes.rates[local].toFixed(4);
+              moeda.appendChild(pais);
+              moeda.appendChild(valor);
+              section.appendChild(moeda);
+        }
+    console.log("restante ok");
+}
+
+const carregarUltimasCotacoes = ()=> {
+  const fonte = "https://api.exchangeratesapi.io/latest";
+     fetch(fonte).then(
+       res => {return res.json()}
+     ).then(
+        dados => {
+           cotacoes = dados;
+           exibirCotacaoPrincipal();
+           exibirOutrasCotacoes();
+        }
+     )
+}
+
+ carregarUltimasCotacoes();
