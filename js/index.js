@@ -1,5 +1,4 @@
-// Declarando o objeto com as cotações
-const cotacoes = {
+let cotacoes = {
     rates:{
         CAD:1.5567,HKD:9.1428,ISK:162.2,PHP:57.167,
         DKK:7.4396,HUF:361.16,CZK:26.747,AUD:1.6152,
@@ -13,3 +12,48 @@ const cotacoes = {
     base:"EUR",
     date:"2020-09-17"
 }
+
+let moedaPrincipal = "BRL";
+
+const exibirCotacaoPrincipal = () => {
+  document.getElementById('moedaBase').innerHTML = cotacoes.base;
+  document.getElementById('moedaPrincipal').innerHTML = moedaPrincipal;
+  document.getElementById('cotacaoPrincipal').innerHTML = cotacoes.rates[moedaPrincipal].toFixed(4);
+  console.log("principal ok");
+}
+
+const exibirOutrasCotacoes = () => {
+    let section = document.getElementById('outrasCotacoes');
+      section.innerHTML = "";
+        for (const local in cotacoes.rates) {
+          if (local != moedaPrincipal) {
+            let moeda = document.createElement('article');
+            let link = document.createElement('A');
+            let pais = document.createElement('h2');
+            let valor = document.createElement('span');
+              pais.innerHTML = local;
+              valor.innerHTML = cotacoes.rates[local].toFixed(4);
+              link.setAttribute("href", "file:///C:/xampp/htdocs/cotacoes2.0/index.html?base="+local);
+              moeda.appendChild(pais);
+              moeda.appendChild(valor);
+              link.appendChild(moeda);
+              section.appendChild(link);
+          }
+        }
+    console.log("restante ok");
+}
+
+const carregarUltimasCotacoes = (moedaBase)=> {
+    const fonte = "https://api.exchangeratesapi.io/latest"+window.location.search;
+     fetch(fonte).then(
+       res => {return res.json()}
+     ).then(
+        dados => {
+           cotacoes = dados;
+           exibirCotacaoPrincipal();
+           exibirOutrasCotacoes();
+        }
+     )
+}
+
+ carregarUltimasCotacoes();
