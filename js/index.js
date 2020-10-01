@@ -16,17 +16,14 @@ let cotacoes = {
 let moedaPrincipal = "BRL";
 
 const exibirCotacaoPrincipal = () => {
-  document.getElementById('moedaBase').innerHTML = cotacoes.base;
-  document.getElementById('moedaPrincipal').innerHTML = moedaPrincipal;
-  document.getElementById('cotacaoPrincipal').innerHTML = cotacoes.rates[moedaPrincipal].toFixed(4);
+  document.getElementById('moedaBase').innerHTML = "1 "+cotacoes.base+" =";
   console.log("principal ok");
 }
 
 const exibirOutrasCotacoes = () => {
     let section = document.getElementById('outrasCotacoes');
-      section.innerHTML = "";
         for (const local in cotacoes.rates) {
-          if (local != moedaPrincipal && local != cotacoes.base){
+          if (local != cotacoes.base){
             let moeda = document.createElement('article');
             let link = document.createElement('A');
             let pais = document.createElement('h2');

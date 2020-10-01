@@ -1,12 +1,13 @@
 *{
     box-sizing: border-box;
 }
+
 body {
     padding: 0;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #b8b8b8;
-    color: #606060;
+    color: white;
 }
 
 main {
@@ -19,7 +20,7 @@ main {
     padding: 20px;
     text-align: center;
     border-radius: 5px;
-    background-color: rgb(226, 226, 226);
+    background-color: #262626;
     margin-bottom: 10px;
 }
 
@@ -33,17 +34,46 @@ main {
 #outrasCotacoes article{
     text-align: center;
     border-radius: 5px;
-    background-color: rgb(226, 226, 226);
+    background-color: #262626;
     padding: 10px 0;
 }
 
+label{
+  text-align: center;
+  border-radius: 5px;
+  background-color: #262626;
+  padding: 10px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+select{
+  color: white;
+  background-color: inherit;
+  border: 1px solid black;
+  width: 100%;
+  padding: 5px;
+  font-size: 20px;
+}
+
+select:focus{
+  outline: none;
+}
+
+select option{
+  background-color: #262626;
+  color: white;
+}
+
 #outrasCotacoes article h2{
+    color: white;
     display: block;
     font-weight: normal;
-    margin: 0 ;
+    margin: 0;
 }
 
 #outrasCotacoes article span{
+    color: white;
     font-weight: bold;
     font-size: 24px;
 }
