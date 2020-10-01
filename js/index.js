@@ -26,23 +26,22 @@ const exibirOutrasCotacoes = () => {
     let section = document.getElementById('outrasCotacoes');
       section.innerHTML = "";
         for (const local in cotacoes.rates) {
-          if (local != moedaPrincipal) {
+          if (local != moedaPrincipal && local != cotacoes.base){
             let moeda = document.createElement('article');
             let link = document.createElement('A');
             let pais = document.createElement('h2');
             let valor = document.createElement('span');
               pais.innerHTML = local;
               valor.innerHTML = cotacoes.rates[local].toFixed(4);
-              link.setAttribute("href", "file:///C:/xampp/htdocs/cotacoes2.0/index.html?base="+local);
+              link.setAttribute("href", window.location.origin+window.location.pathname+"?base="+local);
               moeda.appendChild(pais);
               moeda.appendChild(valor);
               link.appendChild(moeda);
               section.appendChild(link);
           }
-        }
-    console.log("restante ok");
+      }
+      console.log("restante ok");
 }
-
 const carregarUltimasCotacoes = (moedaBase)=> {
     const fonte = "https://api.exchangeratesapi.io/latest"+window.location.search;
      fetch(fonte).then(
@@ -55,5 +54,4 @@ const carregarUltimasCotacoes = (moedaBase)=> {
         }
      )
 }
-
  carregarUltimasCotacoes();
